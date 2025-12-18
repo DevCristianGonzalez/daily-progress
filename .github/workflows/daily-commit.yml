@@ -2,15 +2,23 @@ name: Daily Commit
 
 on:
   schedule:
-    - cron: "0 12 * * *" # todos los días
+    - cron: "0 12 * * *"  # Ejecuta a las 12:00 UTC diariamente
   workflow_dispatch:
+
+# PERMISOS CRÍTICOS - Esto es lo que falta
+permissions:
+  contents: write
 
 jobs:
   commit:
     runs-on: ubuntu-latest
+    
     steps:
-      - uses: actions/checkout@v4
-
+      - name: Checkout con token
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          
       - name: Update log
         run: |
           echo "Update: $(date)" >> log.txt
@@ -21,4 +29,4 @@ jobs:
           git config user.email "actions@github.com"
           git add .
           git commit -m "Daily update" || echo "No changes"
-          git push
+          git push origin main
