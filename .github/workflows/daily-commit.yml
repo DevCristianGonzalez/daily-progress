@@ -2,7 +2,7 @@ name: Daily Commit
 
 on:
   schedule:
-    - cron: "0 12 * * *"  # Ejecuta a las 12:00 UTC diariamente
+    - cron: "0 15 * * *"  # Ejecuta a las 12:00 UTC diariamente
   workflow_dispatch:
 
 # PERMISOS CRÍTICOS - Esto es lo que falta
